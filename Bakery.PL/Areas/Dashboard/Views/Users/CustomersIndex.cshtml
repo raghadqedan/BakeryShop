@@ -1,0 +1,65 @@
+﻿@model IEnumerable<CustomerVM>
+
+@section MainHeader{
+    Customers Report
+}
+@section CardTitle{
+    Show
+}
+
+
+
+<div class="card-body">
+    @if (Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Country</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@($"{item.FirstName} {item.LastName}")</td>
+                        <td>@item.Email</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.Address</td>
+                        <td>@item.City</td>
+                        <td>@item.Country</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <alert class="alert alert-info">No Data</alert>
+    }
+</div>
+
+
+@section Styles{
+    <link href="~/lib/datatables/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+    <script src="~/lib/datatables/js/datatables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('table').DataTable();
+        });
+
+ 
+    </script>
+}
+
+

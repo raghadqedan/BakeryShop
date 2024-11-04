@@ -1,0 +1,60 @@
+﻿@model ProductFormVM
+@section MainHeader{
+    Category
+}
+@section CardTitle{
+     Update
+}
+
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div class="card-body">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ImageName" />
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="alert-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">Description</label>
+                <input asp-for="Description" class="form-control">
+                <span asp-validation-for="Description" class="alert-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image">Image</label>
+                <input asp-for="Image" class="form-control">
+                <span asp-validation-for="Image" class="alert-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category_Id">Select Category</label>
+                @if (ViewData["Categories"] != null)
+                {
+        <select asp-for="Category_Id" class="form-control" asp-items="(SelectList)ViewBag.Categories" >
+                        <option value="">@ViewData["SelectedCategoryName"]</option>
+        </select>
+                }
+                else
+                {
+        <p>No categories available.</p>
+                }
+
+                <span asp-validation-for="Category_Id" class="alert-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price">Price</label>
+                <input asp-for="Price" class="form-control">
+                <span asp-validation-for="Price" class="alert-danger"></span>
+            </div>
+
+</div>
+
+    </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </div>
+</form>
+
+
+

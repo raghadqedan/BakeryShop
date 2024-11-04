@@ -1,0 +1,26 @@
+﻿@model CategoryVM
+@section MainHeader{
+    Category
+}
+@section CardTitle{
+    Details of @Model.Name 
+}
+
+<ul>
+    <li>
+        Name : @Model.Name
+    </li>
+    <li>
+        Description : @Model.Description
+    </li>
+    <li>
+        CreatDate : @Model.CreateDate
+    </li>
+    <li>
+        Image : <img src="~/files/images/@Model.ImageName" width="50px"  />
+    </li>
+
+
+
+</ul>
+

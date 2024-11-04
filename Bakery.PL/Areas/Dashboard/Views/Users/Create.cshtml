@@ -1,0 +1,59 @@
+﻿@model UserFormVM
+
+@section MainHeader{
+    User
+}
+@section CardTitle{
+    Create
+}
+<form  asp-action="Create" enctype="multipart/form-data">
+
+    <div class="card-body">
+       <div class="form-group"> 
+           <label asp-for="FirstName">First Name</label>
+           <input  asp-for="FirstName" class="form-control" />
+           <span asp-validation-for="FirstName"> </span>
+       </div>
+       <div class="form-group">
+           <label asp-for="LastName">LastName</label>
+           <input asp-for="LastName" class="form-control" />
+           <span asp-validation-for="FirstName"></span>
+       </div>
+       <div class="form-group">
+           <label asp-for="RoleId">Role</label>
+            <select class="form-select" asp-for="RoleId" asp-items="@(Model.Roles !=null ?new SelectList(Model.Roles,"Id","Name"):Enumerable.Empty<SelectListItem>())"></select>
+       </div>
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email"></span>
+        </div>
+         <div class="form-group">
+           <label asp-for="Password">Password</label>
+           <input asp-for="Password" class="form-control" />
+           <span asp-validation-for="Password"></span>
+       </div>
+        <div class="form-group">
+            <label asp-for="VerifyPassword">  Verify Password </label>
+            <input asp-for="VerifyPassword" class="form-control" />
+            <span asp-validation-for="VerifyPassword"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PhoneNumber">Phone Number</label>
+            <input asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber"></span>
+        </div>
+
+       <div>
+
+       </div>
+
+
+    </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+
+</form>
+
+

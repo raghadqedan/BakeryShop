@@ -1,0 +1,40 @@
+﻿@model UserVM
+@section MainHeader{
+    users
+}
+@section CardTitle{
+    Details of @($"{ Model.FirstName} {Model.LastName}")
+}
+
+
+
+<ul>
+    <li>
+        First Name : @Model.FirstName
+    </li>
+    <br />
+   
+    <li>
+        LastName : @Model.LastName
+    </li>
+
+    <br />
+    <li>
+        Email : @Model.Email
+    </li>
+
+    <br />
+    <li>
+        Phone Number : @Model.PhoneNumber
+    </li>
+
+    <br />
+
+    <li>
+        Role Name : @Model.RoleName
+    </li>
+
+
+
+</ul>
+

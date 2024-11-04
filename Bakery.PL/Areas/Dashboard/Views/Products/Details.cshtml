@@ -1,0 +1,44 @@
+﻿@model ProductDetailsVM
+@section MainHeader{
+    Product
+}
+@section CardTitle{
+    Details of @Model.Name
+}
+
+
+
+<ul>
+    <li>
+        Name : @Model.Name
+    </li>
+    <br />
+    <li>
+       Image: <img src="~/files/images/@Model.ImageName" width="50px" />
+
+    </li>
+    <br />
+    <li>
+        Description : @Model.Description
+    </li>
+    
+    <br />
+    <li>
+        Price : @Model.Price
+    </li>
+
+    <br />
+    <li>
+        Category : @ViewBag.CategoryName
+    </li>
+
+    <br />
+
+    <li>
+        CreatDate : @Model.CreateDate
+    </li>
+
+
+
+</ul>
+

@@ -1,0 +1,142 @@
+﻿@model IEnumerable<ProductVM>
+
+@section MainHeader{
+    Product
+}
+@section CardTitle{
+    Show
+}
+@section createButton{
+    <a class=" btn btn-primary " asp-action="Create"> Create</a>
+    <br />
+    <br />
+
+
+}
+
+
+<div class="card-body">
+    @if (Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                 
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>category</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+             
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                         <td>
+                            <img src="~/files/images/@item.ImageName" width="70px" />
+                        </td>
+                        <td>@item.Name</td>
+
+                     <td>
+                            @{
+                                var categoryNames = ViewBag.CategoryNames as Dictionary<int, string>;
+                                string categoryName = categoryNames != null && categoryNames.ContainsKey(item.Category_Id.Value)
+                                ? categoryNames[item.Category_Id.Value]
+                                : "Unknown"; // Fallback if category not found
+                            }
+                            @categoryName
+
+                     </td>
+                        <td>@item.Price</td>
+
+                        <td><partial name="_ButtonsPartial" model=@item.Id></partial></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <alert class="alert alert-info">No Data</alert>
+    }
+</div>
+
+
+@section Styles{
+    <link href="~/lib/datatables/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+}
+@section Scripts{
+
+    <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+    <script src="~/lib/datatables/js/datatables.bootstrap4.min.js"></script>
+   
+
+    <script>
+        $(document).ready(function () {
+            $('table').DataTable();
+        });
+
+        var deleteElements = document.querySelectorAll(".delete-btn");
+        deleteElements.forEach(function (btn) {
+            btn.addEventListener("click", async () => {
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        const response = await fetch(`/Dashboard/Products/Delete/${btn.dataset.id}`,
+                            { method: 'Post', headers: { "Content-Type": "application/json" } });
+
+                        if (response.ok) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 1000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: "success",
+                                title: "product Deleted  in successfully"
+                            });
+
+                            btn.closest("tr").remove();
+                        }
+                    }
+                });
+
+
+
+
+
+            })
+
+
+
+        })
+
+
+
+
+
+
+
+
+
+    </script>
+}
+
