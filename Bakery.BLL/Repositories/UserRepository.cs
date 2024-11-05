@@ -157,19 +157,9 @@ namespace Bakery.BLL.Repositories
            await  userManager.UpdateAsync(model);
         }
 
-
-
-
-
-
-
-
-
-
-        //  public IEnumerable<ApplicationUser> GetAllUsersWithAdminstrateRole()
-        //  {
-        //    var users=
-        ///
-        //  }
+        public async Task<ApplicationUser> GetByEmailAsync(string email)
+        {
+            return await userManager.FindByEmailAsync(email);
+        }
     }
 }

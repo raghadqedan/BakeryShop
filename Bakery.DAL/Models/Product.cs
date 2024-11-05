@@ -13,6 +13,9 @@ namespace Bakery.DAL.Models
         public string Name { get; set; } = null!;
         public string ImageName { get; set; }
         public decimal Price { get; set; }
+        public int StockQuantity { get; set; }
+
+        
         public string Description { get; set; } = null!;
 
         [ForeignKey(nameof(Category))]

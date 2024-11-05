@@ -31,6 +31,7 @@ namespace Bakery.DAL
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
 
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingProfile)));
 

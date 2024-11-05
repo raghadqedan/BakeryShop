@@ -5,13 +5,17 @@ using Bakery.DAL.Models;
 using Bakery.PL.Areas.Dashboard.ViewModels.category;
 using Bakery.PL.Areas.Dashboard.ViewModels.Product;
 using Bakery.PL.Helper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Bakery.PL.Areas.Dashboard.Controllers
 {
     [Area("Dashboard")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
+
     public class ProductsController : Controller
     {
         private readonly IProductRepository productRepository;

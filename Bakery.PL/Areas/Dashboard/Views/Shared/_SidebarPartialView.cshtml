@@ -37,31 +37,35 @@
                      with font-awesome or any other icon font library -->
                
                 <li class="nav-item">
-                    <a asp-controller="Category" asp-action="Index" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                    <a asp-controller="Category" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Category" ? "active" : "")">
+                        
+                        <i class="nav-icon fas fa-th   "></i>
                         <p>
                            Categories
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a asp-controller="Products" asp-action="Index" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                    <a asp-controller="Products" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Products"? "active":"")">
+                        
+                        <i class="nav-icon fas fa-th "></i>
                         <p>
                             Products
                         </p>
                     </a>
                 </li>
                  <li class="nav-item">
-                    <a asp-controller="Users" asp-action="Index"  class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                    <a asp-controller="Users" asp-action="Index" class="nav-link  @(ViewContext.RouteData.Values["controller"].ToString() == "Users" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+                        
+                        <i class="nav-icon fas fa-th "></i>
                         <p>
                             Users
                         </p>
                     </a>
                 </li>
                 <li class="nav-item menu-open">
-                    <a href="#" class="nav-link ">
+                    <a href="#" class="nav-link" id="reportsLink">
+                        
                         <i class="nav-icon fas fa-file-alt "></i>
                         <p>
                             Reports
@@ -70,9 +74,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a asp-controller="Users" asp-action="GetAllCustomers" class="nav-link active">
-                                <i class="far fa-circle nav-icon"></i>
+                            <a asp-controller="Users" asp-action="GetAllCustomers" class="nav-link-item @(ViewContext.RouteData.Values["controller"].ToString() == "Users" && ViewContext.RouteData.Values["action"].ToString() == "GetAllCustomers" ? "active" : "")">
+           
                                 <p>Customers</p>
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                            <a asp-controller="Orders" asp-action="Index" class="nav-link-item @(ViewContext.RouteData.Values["controller"].ToString() == "Orders" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+
+                                <p>Orders</p>
                             </a>
                         </li>
                        
@@ -84,3 +94,4 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+

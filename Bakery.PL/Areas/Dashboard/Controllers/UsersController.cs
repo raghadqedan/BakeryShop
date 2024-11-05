@@ -3,6 +3,7 @@ using Bakery.BLL.IRepositories;
 using Bakery.BLL.Repositories;
 using Bakery.DAL.Models;
 using Bakery.PL.Areas.Dashboard.ViewModels.users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Bakery.PL.Areas.Dashboard.Controllers
 {
     [Area("Dashboard")]
+    
     public class UsersController : Controller
     {
         private readonly IUserRepository userRepository;
@@ -18,15 +20,15 @@ namespace Bakery.PL.Areas.Dashboard.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly ILogger<UsersController> logger;
 
-        public UsersController(IUserRepository userRepository, IMapper mapper, UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager)
+        public UsersController(IUserRepository userRepository, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             this.userRepository = userRepository;
             this.mapper = mapper;
             this.userManager = userManager;
-            this.roleManager = roleManager;
+            
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Index()
         {
             var usersDto = await userRepository.GetAllAdminOrSuperAdminUsers();
@@ -52,6 +54,7 @@ namespace Bakery.PL.Areas.Dashboard.Controllers
 
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         public async Task<IActionResult> GetAllCustomers()
         {
             var usersDto = await userRepository.GetAllCustomer();
@@ -62,13 +65,15 @@ namespace Bakery.PL.Areas.Dashboard.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create() {
-            var roles = await roleManager.Roles.ToListAsync();
+            var roles = await userRepository.GetAllRoles();
             var userVM = new UserFormVM { Roles = roles };
 
             return View(userVM);
         }
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create(UserFormVM input)
         {
             
@@ -99,12 +104,13 @@ namespace Bakery.PL.Areas.Dashboard.Controllers
         }
             public async Task<IActionResult> IsEmailAvailable(string email)
             {
-              // Check if the email is already taken
-            var user = await userManager.FindByEmailAsync(email);
+            // Check if the email is already taken
+            var user = await userRepository.GetByEmailAsync(email);
                 return Json(user == null);  // Returns true if available, false if already taken
             }
-         
 
+        [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Details(string Id)
         {
             
@@ -124,6 +130,7 @@ namespace Bakery.PL.Areas.Dashboard.Controllers
 
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult>Edit(string Id)
         {
             var model = await userRepository.Get(Id);
@@ -138,6 +145,8 @@ namespace Bakery.PL.Areas.Dashboard.Controllers
             ViewBag.roleName = roles.FirstOrDefault()??"No Role Assigned";
             return View(vm);
         }
+
+        [Authorize(Roles = "SuperAdmin")]
         public async Task Delete(string Id)
         {
            await  userRepository.Delete(Id);

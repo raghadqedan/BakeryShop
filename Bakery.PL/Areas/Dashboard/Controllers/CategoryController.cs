@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Bakery.PL.Areas.Dashboard.Controllers
 {
     [Area("Dashboard")]
-     //[Authorize(Roles ="Admin,SuperAdmin")]
+     [Authorize(Roles ="Admin,SuperAdmin")]
     public class CategoryController : Controller
     {
         private readonly ICategoryRepository categoryReprository;

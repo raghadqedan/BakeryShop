@@ -4,6 +4,7 @@ using Bakery.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bakery.DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241105201904_update-user-table")]
+    partial class updateusertable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,9 +110,9 @@ namespace Bakery.DAL.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6e860f65-fcd1-43c4-9c37-78cce232406d",
+                            Id = "cdda0585-1c2e-4726-92ee-db2f06eb9a97",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e95964c4-7900-46c3-8ca5-723966b2de0b",
+                            ConcurrencyStamp = "84826029-7b9f-4115-9fc0-dc916faf9e71",
                             Email = "superAdmin@comp.com",
                             EmailConfirmed = false,
                             FirstName = "superAdmin",
@@ -118,9 +120,9 @@ namespace Bakery.DAL.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@COMP.COM",
                             NormalizedUserName = "SUPERADMIN@COMP.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEACru/hyKtdglRc1bWTLJbAwuCatA+4BFHSZJaE8vdSGH9ENb8PVnSg9myEXw58INg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEApcmyDf2/fBpidzb5uoR2SZPn2KiV0+1+YYakxiLoyd6okua6n+8bnL89EUBzWsVQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c4b85b07-a5b7-4fa0-b174-29f50729830f",
+                            SecurityStamp = "12511204-1674-435e-a204-7fe9a4b5d6b9",
                             TwoFactorEnabled = false,
                             UserName = "superAdmin@comp.com"
                         });
@@ -318,9 +320,6 @@ namespace Bakery.DAL.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("StockQuantity")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Category_Id");
@@ -357,22 +356,22 @@ namespace Bakery.DAL.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "15654d89-21ad-4cb1-b712-5e6bae63ba35",
-                            ConcurrencyStamp = "85dec1bb-0dec-4fbd-822c-8d535906ad2e",
+                            Id = "3082cd33-1ce7-4042-9268-e5d946c510c6",
+                            ConcurrencyStamp = "4836d912-db5f-4cc9-ab16-58aeccc2cc81",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         },
                         new
                         {
-                            Id = "193c555c-adc6-44d2-ba02-38af456921a3",
-                            ConcurrencyStamp = "2dc5b1b0-b15f-4b37-83c9-3cd54d467d20",
+                            Id = "f936cf4d-9924-4a47-900e-e8cb858dd2f9",
+                            ConcurrencyStamp = "cd3dc512-cf6b-4b5d-a0ef-4041a693cb24",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c8cd8ce1-c958-4dca-a1c1-ca5b39c4d8fc",
-                            ConcurrencyStamp = "4427f0cb-68f1-47c3-9257-692c2aa46f6e",
+                            Id = "1812ad0c-9b47-458b-be4a-7a6241cc8127",
+                            ConcurrencyStamp = "5e1d3419-ce4e-4f03-978a-4d30dc8b31b0",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -467,8 +466,8 @@ namespace Bakery.DAL.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "6e860f65-fcd1-43c4-9c37-78cce232406d",
-                            RoleId = "15654d89-21ad-4cb1-b712-5e6bae63ba35"
+                            UserId = "cdda0585-1c2e-4726-92ee-db2f06eb9a97",
+                            RoleId = "3082cd33-1ce7-4042-9268-e5d946c510c6"
                         });
                 });
 

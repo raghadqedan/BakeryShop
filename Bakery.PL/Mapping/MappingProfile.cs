@@ -2,6 +2,7 @@
 using Bakery.DAL.DTO;
 using Bakery.DAL.Models;
 using Bakery.PL.Areas.Dashboard.ViewModels.category;
+using Bakery.PL.Areas.Dashboard.ViewModels.orders;
 using Bakery.PL.Areas.Dashboard.ViewModels.Product;
 using Bakery.PL.Areas.Dashboard.ViewModels.users;
 
@@ -20,6 +21,10 @@ namespace Bakery.PL.Mapping
             CreateMap<UserFormVM, ApplicationUser>().ReverseMap();
             CreateMap<UserVM, UserDTO>().ReverseMap();
             CreateMap<CustomerVM, CustomerDTO>().ReverseMap();
+            CreateMap<Order, OrderVM>().ReverseMap();
+            CreateMap<Order, OrderDetailsVM>().ReverseMap();
+
+
 
 
 

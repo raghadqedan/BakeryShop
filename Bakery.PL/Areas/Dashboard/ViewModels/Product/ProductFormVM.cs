@@ -13,6 +13,7 @@ namespace Bakery.PL.Areas.Dashboard.ViewModels.Product
         public IFormFile Image { get; set; }
         public string? ImageName { get; set; }
         public decimal Price { get; set; }
+        public int StockQuantity { get; set; }
         public string Description { get; set; } = null!;
 
         public int? Category_Id { get; set; }

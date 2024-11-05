@@ -21,6 +21,8 @@ namespace Bakery.BLL.IRepositories
         public  Task<IEnumerable<CustomerDTO>> GetAllCustomer();
         public Task<IdentityResult> Add(ApplicationUser model, string password);
         public Task<ApplicationUser> Get(String Id);
+        public Task<ApplicationUser> GetByEmailAsync(string email);
+        
         public Task Update(ApplicationUser model);
 
         public Task Delete(string Id);

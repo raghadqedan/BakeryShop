@@ -11,3 +11,24 @@
 
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    document.getElementById("reportsLink").addEventListener("click", function () {
+        // Remove active class from all other nav-links
+        document.querySelectorAll(".nav-link").forEach(link => link.classList.remove("active"));
+        // Add active class to clicked link
+    this.classList.add("active");
+  });
+
+
+   /* document.querySelectorAll(".nav-link-item").forEach(item=>item.addEventListener("click",function(){
+        document.getElementById("reportsLink").classList.add("active");
+
+        this.classList.add("active");
+
+    })
+    );
+    */
+ 
+
+
+</script>

@@ -10,7 +10,7 @@ namespace Bakery.PL.Areas.Dashboard.ViewModels.users
     public class UserFormVM
     {
 
-        public string Id { get; set; }
+       
         [MaxLength(100)]
         public string FirstName { get; set; }
 

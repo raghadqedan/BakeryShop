@@ -1,0 +1,135 @@
+﻿@model IEnumerable<OrderVM>
+
+@section MainHeader{
+    Orders
+}
+@section CardTitle{
+    Show
+}
+@section createButton{
+    <a class=" btn btn-primary " asp-action="Create"> Create</a>
+    <br />
+    <br />
+
+
+}
+
+
+<div class="card-body">
+    @if (Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Order Date</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.OrderDate</td>
+                        <td>@($"{item.ApplicationUser.FirstName} {item.ApplicationUser.LastName}")</td>
+                        <td class="status-td">@item.OrderStatus</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm ">
+                                <i class="fas fa-folder"> </i>
+                                View
+                            </a>
+                            <a  data-id=@item.Id   class="btn btn-info btn-sm edit-btn">
+                                <i class="fas fa-pencil-alt"> </i>
+                                Edit Status
+                            </a>
+                           
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <alert class="alert alert-info">No Data</alert>
+    }
+</div>
+
+
+@section Styles{
+    <link href="~/lib/datatables/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+    <script src="~/lib/datatables/js/datatables.bootstrap4.min.js"></script>
+<script>
+    document.querySelectorAll(".edit-btn").forEach(btn => {
+    btn.addEventListener("click", async () => {
+        const { value: status } = await Swal.fire({
+            title: "Select status ",
+            input: "select",
+           inputOptions: {
+                        'Pending': 'Pending',
+                        'Shipped': 'Shipped',
+                        'Delivered': 'Delivered',
+                        'Canceled': 'Canceled'
+}
+,
+            inputPlaceholder: "Select a status",
+            showCancelButton: true,
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'You need to select a status!';
+                }
+            }
+        });
+
+                console.log(status);
+                if (status!=null) { // Only proceed if a status was selected
+            const response = await fetch(`/Dashboard/Orders/Edit/${btn.dataset.id}`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                       body: JSON.stringify({ "status": status }) // Send status in the request body
+            });
+                    console.log(response);
+
+                    if (response.ok) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+
+                Toast.fire({
+                    icon: "success",
+                    title: "Order status updated successfully"
+                });
+
+                     const statusCell= btn.closest("tr").querySelector(".status-td");
+                     if(statusCell){
+                     statusCell.textContent=status;
+                     }
+
+             //   btn.closest("tr").remove(); // Update UI as needed
+            }
+        }
+    });
+});
+
+
+</script>
+
+
+}
+
+

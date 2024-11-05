@@ -14,7 +14,9 @@ namespace Bakery.PL.Areas.Dashboard.ViewModels.Product
        
         public string ImageName { get; set; }
 
-        
+        public int StockQuantity { get; set; }
+
+
         public decimal Price { get; set; }
 
         // Add this property to access Category_Id

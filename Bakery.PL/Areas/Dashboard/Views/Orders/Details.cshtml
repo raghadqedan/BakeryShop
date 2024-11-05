@@ -1,0 +1,89 @@
+﻿@model OrderDetailsVM
+@section MainHeader{
+    Orders
+}
+@section CardTitle{
+        Details
+}
+
+<br />
+
+<ul>
+    <p>
+        Order Date : @Model.OrderDate
+    </p>
+
+    <br />
+
+     <p>
+        Order status : @Model.OrderStatus
+    </p>
+    <br />
+
+    <p>
+        Customer Name : @($"{Model.ApplicationUser.FirstName} {Model.ApplicationUser.LastName}")
+    </p>
+
+    <br />
+    <p>
+        Email : @Model.ApplicationUser.Email
+    </p>
+
+    <br />
+    <p>
+        Phone Number : @Model.ApplicationUser.PhoneNumber
+    </p>
+
+    <br />
+
+    <p>
+        Address : @Model.ApplicationUser.Address
+    </p>
+    <p>
+        City : @Model.ApplicationUser.City
+    </p>
+    <p>
+        Country : @Model.ApplicationUser.Country
+    </p>
+</ul>
+  @if (Model.OrderDetail.Any()){
+
+            <table class="table table-hover text-nowrap">
+                <thead>
+                    <tr>
+                         <th>product Image</th>
+                         <th>Product Name</th>
+                         <th>product Price</th>
+                         <th>product Quntity</th>
+                    </tr>
+                </thead>
+                <tbody>
+            @foreach (var item in Model.OrderDetail)
+            {
+                <tr>
+                    <td><img src="~/files/images/@item.Product.ImageName" width="60px"></img></td>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Product.Price</td>
+                    <td>@item.Quantity</td>
+
+                </tr>
+
+            }
+
+                   
+                </tbody>
+            </table>
+   
+
+
+
+}
+else
+{
+    
+        <p> No Data</p>
+    
+
+}
+
+
