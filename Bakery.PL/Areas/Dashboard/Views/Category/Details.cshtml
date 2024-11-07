@@ -3,24 +3,28 @@
     Category
 }
 @section CardTitle{
-    Details of @Model.Name 
+    Details 
 }
 
-<ul>
-    <li>
-        Name : @Model.Name
-    </li>
-    <li>
-        Description : @Model.Description
-    </li>
-    <li>
-        CreatDate : @Model.CreateDate
-    </li>
-    <li>
-        Image : <img src="~/files/images/@Model.ImageName" width="50px"  />
-    </li>
 
+<div class="container">
+    <div class="row mt-4">
+        <!-- Left Column for Image -->
+        <div class="col-md-4 d-flex align-items-center justify-content-center mb-4">
+           
+            <img src="~/files/images/@Model.ImageName" alt="Image" width="300px" />
+        </div>
 
-
-</ul>
+        <!-- Right Column for Details -->
+        <div class="col-md-8 mb-4 mt-4">
+            <ul>
+                <li><strong>Name:</strong> @Model.Name</li>
+                <br />
+                <li><strong>Description:</strong> @Model.Description</li>
+                <br />
+                <li><strong>Creation Date:</strong> @Model.CreateDate.ToString("MM/dd/yyyy")</li>
+            </ul>
+        </div>
+    </div>
+</div>
 

@@ -3,45 +3,64 @@
     Product
 }
 @section CardTitle{
-    Details of @Model.Name
+    Details 
 }
 
 
+<div class="container">
+    <div class="row mt-4">
+        <!-- Left Column for Image -->
+        <div class="col-md-4 d-flex align-items-center justify-content-center mb-4">
 
-<ul>
-    <li>
-        Name : @Model.Name
-    </li>
-    <br />
-    <li>
-       Image: <img src="~/files/images/@Model.ImageName" width="50px" />
+            <img src="~/files/images/@Model.ImageName" width="300px" />
 
-    </li>
-    <br />
-    <li>
-        Description : @Model.Description
-    </li>
-    
-    <br />
-    <li>
-        Price : @Model.Price
-    </li>
-    <li>
-        Stock Quantity : @Model.StockQuantity
-    </li>
+        </div>
+        <div class="col-md-8 mb-4 mt-4">
+            <ul>
+                <li><strong>
+                        Name : </strong> @Model.Name
+                   
+                </li>
+                <br />
 
-    <br />
-    <li>
-        Category : @ViewBag.CategoryName
-    </li>
+                <li><strong>
+                        Description :
+                    </strong>@Model.Description
+                   
+                </li>
 
-    <br />
+                <br />
+                
+                <li>
+                    <strong>
+                        Price :
+                    </strong> @Model.Price
+                        
+                </li>
+                <br />
+                <li>
+                    <strong>
+                        Stock Quantity :
+                    </strong>@Model.StockQuantity
+                    
+                </li>
 
-    <li>
-        CreatDate : @Model.CreateDate
-    </li>
+                <br />
+                <li>
+                    <strong>
+                        Category :
+                    </strong> @ViewBag.CategoryName
+                   
+                </li>
 
+                <br />
 
+                <li>
+                    <strong>
+                        CreatDate :
+                    </strong>@Model.CreateDate
+                  
+                </li>
 
-</ul>
-
+            </ul>
+      </div>
