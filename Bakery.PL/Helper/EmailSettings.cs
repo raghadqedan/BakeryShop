@@ -10,11 +10,14 @@ namespace Bakery.PL.Helper
         public static  void SendEmail (Email email)
         {
            
-                var client = new SmtpClient("smtp.gmail.com", 587);
-                client.EnableSsl = true;
-                client.Credentials = new NetworkCredential("raghadwasef@gmail.com", "11111");
+                var client = new SmtpClient("smtp.gmail.com",587);
+                client.EnableSsl= true;
+                client.Credentials = new NetworkCredential("raghadwasef@gmail.com", "yxlm favq jatw fqza");
+           
                 client.Send("raghadwasef@gmail.com", email.Recivers, email.Subject, email.Boady);
-          
+            
+           
+              
         }
     }
 }

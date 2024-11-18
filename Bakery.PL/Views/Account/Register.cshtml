@@ -86,36 +86,64 @@
 <script>
 
 
-
-    @if (TempData["RegistrationSuccess"] != null)
-    {
-        <text>swal.fire({
+    var form = document.querySelector("#register-form");
+    form.addEventListener("submit",async(e)=>{
+        e.preventDefault();
+        // Convert form data to JSON
+    var formData = new FormData(form);
+    var jsonData = {};
+    formData.forEach((value, key) => {
+        jsonData[key] = value;
+    });
+     
+        try{
+            const response = await fetch(`/Account/Register`, {
+                method: 'POST', // Use POST for form submission
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(jsonData)
+                
+            });
+            if(response.ok){
+                swal.fire({
                 title: "check your email",
                 //showconfirmbutton: false,
-                text: "the reset password link has been sent.",
+                text: "the confirm email link has been sent.",
                 imageUrl: "@Url.Content("~/files/images/check-email.webp")",
                 imageWidth: 400,
                 imageHeight: 200,
                 imageAlt: "custom image"
             });
-        </text>
-    }
 
-    @if (TempData["SendResetPasswordEmailFailed"] != null)
-    {
-        <text>swal.fire({
+            }else{
+                swal.fire({
                 title: "Error",
                 //showconfirmbutton: false,
-                text: "There was an issue sending the reset password link. Please try again.",
+                text: "There was an issue sending the confirm Email link. Please try again.",
                 imageUrl: "@Url.Content("~/files/images/check-email.webp")",
                 imageWidth: 400,
                 imageHeight: 200,
                 imageAlt: "custom image"
             });
-        </text>
+
+            }
+        
+        
+        
+        }catch(error){
+
+            console.error("Error during the request:", error);
+            Swal.fire({
+                title: "Error",
+                text: "Something went wrong. Please try again later.",
+                icon: "error",
+            });
 
 
-    }
+
+        }
+
+
+    });
 
 
 

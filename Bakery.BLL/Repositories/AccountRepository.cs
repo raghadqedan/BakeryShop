@@ -47,5 +47,10 @@ namespace Bakery.BLL.Repositories
         {
             return await userManager.ResetPasswordAsync(user,token,password);
         }
+
+        public async Task<string> GenerateEmailConfirmationTokenAsync(ApplicationUser user)
+        {
+            return await userManager.GenerateEmailConfirmationTokenAsync(user);
+        }
     }
 }

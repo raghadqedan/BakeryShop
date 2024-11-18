@@ -31,12 +31,12 @@ namespace Bakery.PL.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterVM input)
+        public async Task<IActionResult> Register([FromBody] RegisterVM input)
         {
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
-                {
+                { 
                     FirstName = input.FirstName,
                     LastName = input.LastName,
                     Email = input.Email,
@@ -48,8 +48,8 @@ namespace Bakery.PL.Controllers
                 var result = await accountRepository.Register(user, input.Password);
                 if (result.Succeeded)
                 {
-                    var token = accountRepository.GeneratePasswordResetTokenAsync(user);
-                    var confirmedUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token });
+                    var token = await accountRepository.GenerateEmailConfirmationTokenAsync(user);
+                    var confirmedUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token }, protocol: HttpContext.Request.Scheme);
                     var email = new Email()
                     {
                         Subject = "Confirm Email",
@@ -58,18 +58,8 @@ namespace Bakery.PL.Controllers
 
 
                     };
-                    try {
+                
                         EmailSettings.SendEmail(email);
-                        TempData["RegistrationSuccess"] = true;
-                        return View("CheckEmail");
-                    }
-                    catch(Exception e)
-                    {
-                        TempData["RegistrationFailed"] = true;
-                        return View("Error", "Home");
-                    }
-                   
-
                  
                 }
 
@@ -105,6 +95,10 @@ namespace Bakery.PL.Controllers
                                 return RedirectToAction("Index", "Category", new { area = "Dashboard" });
 
                             }
+                            else
+                            {
+                                return RedirectToAction("Index", "Home");
+                            }
                         }
                     }
 
@@ -130,15 +124,15 @@ namespace Bakery.PL.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> SendResetPasswordUrl(ForgotPasswordVM input)
+        [HttpPost]
+        public async Task<IActionResult> SendResetPasswordUrl( [FromBody] ForgotPasswordVM input)
         {
             if (ModelState.IsValid) {
                 var user = await accountRepository.GetByEmailAsync(input.Email);
                 var token = await accountRepository.GeneratePasswordResetTokenAsync(user);
                 if (user != null)
                 {
-                    var resetPasswordUrl = Url.Action("ResetPassword", "Account", new { email = input.Email,token = token }, protocol: HttpContext.Request.Scheme); ;
+                    var resetPasswordUrl = Url.Action("ResetPassword", "Account", new { email = input.Email,token = token }, protocol: HttpContext.Request.Scheme); 
                     var email = new Email()
                     {
                         Subject = "Reset Password",
@@ -146,15 +140,8 @@ namespace Bakery.PL.Controllers
                         Boady = resetPasswordUrl
 
                     };
-                    try {
+                    
                         EmailSettings.SendEmail(email);
-                        TempData["SendResetPasswordEmailSuccess"] = true;
-                    }catch (Exception e)
-                    {
-                        TempData["SendResetPasswordEmailFailed"] = true;
-                    }
-                  
-                   
                    
                 }
             }

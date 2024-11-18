@@ -16,6 +16,7 @@ namespace Bakery.BLL.IRepositories
         public Task<bool> CheckPasswordAsync(ApplicationUser user, string password);
         public Task<bool> IsInRole(ApplicationUser user, string roleName);
         public Task<string> GeneratePasswordResetTokenAsync(ApplicationUser user);
+        public Task<string> GenerateEmailConfirmationTokenAsync(ApplicationUser user);
         public Task<IdentityResult> ResetPasswordAsync(ApplicationUser user, string token, string password);
 
 
