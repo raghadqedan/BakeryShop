@@ -59,7 +59,7 @@ namespace Bakery.PL.Areas.Identity.Pages.Account
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(bool rememberMe, string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(bool rememberMe, string? returnUrl = null)
         {
             if (!ModelState.IsValid)
             {

@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewData["Title"] = "CheckEmail";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<section class="email-confirmation">
+   
+        <div class="confirmation-box">
+            <img src="~/files/images/check-email.webp" alt="Check Email" class="confirmation-image" />
+            <h2>Registration Successful!</h2>
+            <p>
+                We've sent a confirmation email to <strong>@ViewBag.Email</strong>.
+                Please check your email and click the confirmation link to verify your account.
+            </p>
+            <p>
+                If you don’t receive the email in a few minutes, check your spam folder or 
+                <a asp-action="ResendConfirmationEmail" asp-controller="Account" asp-route-email="@ViewBag.Email">click here to resend the confirmation email</a>.
+            </p>
+       
+    </div>
+</section>
+
+
+<style>
+    .email-confirmation {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+    }
+
+    .confirmation-box {
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+    }
+
+    .confirmation-image {
+        width: 150px;
+        margin-bottom: 20px;
+    }
+
+    .confirmation-box h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .confirmation-box p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    .confirmation-box a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .confirmation-box a:hover {
+            text-decoration: underline;
+        }
+</style>

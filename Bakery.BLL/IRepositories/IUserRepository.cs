@@ -26,6 +26,7 @@ namespace Bakery.BLL.IRepositories
         public Task Update(ApplicationUser model);
 
         public Task Delete(string Id);
+        public  Task<IdentityResult> ConfirmEmailAsync(ApplicationUser user, string token);
 
 
 

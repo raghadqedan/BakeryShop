@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-Bakery.PL-4c3ba06c-e7a9-4ffd-8bcd-eb3bd082c432</UserSecretsId>
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,8 +29,5 @@
     <ProjectReference Include="..\Bakery.BLL\Bakery.BLL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\files\images\" />
-  </ItemGroup>
-
+	
 </Project>

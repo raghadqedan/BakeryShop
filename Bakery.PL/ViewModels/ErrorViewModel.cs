@@ -1,4 +1,4 @@
-namespace Bakery.PL.Models
+namespace Bakery.PL.ViewModels
 {
     public class ErrorViewModel
     {

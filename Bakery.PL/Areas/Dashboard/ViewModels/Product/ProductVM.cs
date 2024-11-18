@@ -11,8 +11,8 @@ namespace Bakery.PL.Areas.Dashboard.ViewModels.Product
      
         public string Name { get; set; } = null!;
 
-       
-        public string ImageName { get; set; }
+
+        public string ImageName { get; set; } = null!;
 
         public int StockQuantity { get; set; }
 

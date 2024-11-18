@@ -17,8 +17,8 @@ namespace Bakery.PL.Areas.Dashboard.Controllers
         private readonly IUserRepository userRepository;
         private readonly IMapper mapper;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly ILogger<UsersController> logger;
+
+
 
         public UsersController(IUserRepository userRepository, IMapper mapper, UserManager<ApplicationUser> userManager)
         {

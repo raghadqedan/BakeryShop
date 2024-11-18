@@ -161,5 +161,9 @@ namespace Bakery.BLL.Repositories
         {
             return await userManager.FindByEmailAsync(email);
         }
+        public async Task<IdentityResult> ConfirmEmailAsync(ApplicationUser user, string token)
+        {
+            return await userManager.ConfirmEmailAsync(user, token);
+        }
     }
 }

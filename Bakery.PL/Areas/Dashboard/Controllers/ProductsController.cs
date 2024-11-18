@@ -115,6 +115,7 @@ namespace Bakery.PL.Areas.Dashboard.Controllers
             ViewBag.Categories = new SelectList(categories, "Id", "Name");
             var currentCategory = categoryRepository.Get(product.Category_Id);
             ViewData["SelectedCategoryName"] = currentCategory.Name;
+            
             return View(mapper.Map<ProductFormVM>(product));
 
 
